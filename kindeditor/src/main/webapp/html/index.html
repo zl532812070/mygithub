@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
+</head>
+<body>
+	<form id="frm" name="frm" action="" method="post">
+		形象图：<input id="pic" name="pic" type="text" />
+		<select name="piclist" id="piclist" onChange="frm.pic.value=this.value; if(this.value.length>0){picshow.innerHTML='<img src=' + this.value + ' width=150 height=95 />';}else{picshow.innerHTML='<img src=images/nopic.gif width=150 height=95 />';}">
+		    <option value="">不指定文章形象图</option>
+		</select>
+		<div id="picshow"></div>
+		<textarea id="Content" name="Content" style=" width: 99%; height: 500px; visibility: hidden; display: block; "></textarea>
+	</form>
+</body>
+<script charset="utf-8" src="../kindeditor/kindeditor-all.js"></script>
+<script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+<script>
+	var KE;
+	KindEditor.ready(function(K) {
+	    KE = K.create('#Content',{
+	        uploadJson : '../kindeditor/jsp/upload_json.jsp',
+	        fileManagerJson : '../kindeditor/jsp/file_manager_json.jsp',
+	        allowImageUpload: true, //多图上传
+	        allowFileManager : true, //浏览图片空间
+	        filterMode : false, //HTML特殊代码过滤
+	        afterBlur: function(){ this.sync(); }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
+	        afterUpload : function(url, data, name) { //上传文件后执行的回调函数，必须为3个参数
+	            if(name=="image" || name=="multiimage"){ //单个和批量上传图片时
+	                if(K("#pic").length>0){ //文本框存在
+	                    document.getElementById('piclist').options[document.getElementById('piclist').length]=new Option(url,url); //下拉列表框增加一条
+	                    document.getElementById('piclist').selectedIndex+=1; //选定刚新增的这一条
+	                    K("#picshow").html("<img src='" + url + "' width='150' height='95' />"); //重置图片展示区DIV的HTML内容
+	                    K("#pic").val(url); //重置文本框值
+	                }
+	            }
+	        }
+	    });
+	});
+</script>
+</html>
