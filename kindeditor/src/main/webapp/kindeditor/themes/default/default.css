@@ -1092,23 +1092,13 @@
 	float: right;
 }
 .ke-plugin-filemanager-body {
-	overflow: scroll;
-	background-color:#FFFFFF;
-	border-color: #848484 #E0E0E0 #E0E0E0 #848484;
-	border-style: solid;
-	border-width: 1px;
-	width: auto;
-	height: 370px;
-	padding: 5px;
+	border: 1px solid #DDDDDD; background-color:#FFFFFF; padding: 6px; position:relative;
 }
 .ke-plugin-filemanager-body .ke-item {
-	width: 100px;
-	margin: 5px;
+	border: 1px solid #DDDDDD; background-color:#FFFFFF; padding: 6px; position:relative;
 }
 .ke-plugin-filemanager-body .ke-photo {
-	border: 1px solid #DDDDDD;
-	background-color:#FFFFFF;
-	padding: 10px;
+	border: 1px solid #DDDDDD; background-color:#FFFFFF; padding: 6px; position:relative;
 }
 .ke-plugin-filemanager-body .ke-name {
 	width: 100px;

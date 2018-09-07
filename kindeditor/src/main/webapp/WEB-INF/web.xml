@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
- 
- <servlet>
- 	<servlet-name>cpuTest</servlet-name>
- 	<servlet-class>com.yjp.test.CpuTestServlet</servlet-class>
- </servlet>
- <servlet-mapping>
- 	<servlet-name>cpuTest</servlet-name>
- 	<url-pattern>/cpuTest</url-pattern>
- </servlet-mapping>
- 	
+  <servlet>
+    <servlet-name>cpuTest</servlet-name>
+    <servlet-class>com.yjp.test.CpuTestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cpuTest</servlet-name>
+    <url-pattern>/cpuTest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>fileManagerJson</servlet-name>
+    <servlet-class>com.kindeditor.servlet.FileManagerJson</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fileManagerJson</servlet-name>
+    <url-pattern>/fileManagerJson</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>uploadJson</servlet-name>
+    <servlet-class>com.kindeditor.servlet.UploadJson</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>uploadJson</servlet-name>
+    <url-pattern>/uploadJson</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteJson</servlet-name>
+    <servlet-class>com.kindeditor.servlet.DeleteJson</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteJson</servlet-name>
+    <url-pattern>/deleteJson</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>localPath</param-name>
+    <param-value>D:\\attached</param-value>
+  </context-param>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

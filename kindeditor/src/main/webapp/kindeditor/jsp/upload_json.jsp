@@ -16,7 +16,7 @@
  */
 
 //文件保存目录路径
-String savePath = pageContext.getServletContext().getRealPath("/") + "attached/";
+String savePath = pageContext.getServletContext().getRealPath("/") + "attached";
 
 //文件保存目录URL
 String saveUrl  = request.getContextPath() + "/attached/";
@@ -42,13 +42,15 @@ System.out.println(saveUrl);
 //检查目录
 File uploadDir = new File(savePath);
 if(!uploadDir.isDirectory()){
-	out.println(getError("上传目录不存在。"));
-	return;
-}
-//检查目录写权限
-if(!uploadDir.canWrite()){
-	out.println(getError("上传目录没有写权限。"));
-	return;
+	Runtime run = Runtime.getRuntime();  
+	Process proc = null;
+	String os = System.getProperty("os.name");
+	if(os.toLowerCase().startsWith("win")){
+		proc = run.exec("cmd /c mklink /D "+savePath+" d:\\attached");
+	}else{
+		proc = run.exec("");
+	}
+	proc.waitFor();
 }
 
 String dirName = request.getParameter("dir");
@@ -60,7 +62,7 @@ if(!extMap.containsKey(dirName)){
 	return;
 }
 //创建文件夹
-savePath += dirName + "/";
+savePath += "/" +dirName + "/";
 saveUrl += dirName + "/";
 File saveDirFile = new File(savePath);
 if (!saveDirFile.exists()) {

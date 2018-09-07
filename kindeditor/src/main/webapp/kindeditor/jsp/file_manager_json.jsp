@@ -13,11 +13,24 @@
  */
 
 //根目录路径，可以指定绝对路径，比如 /var/www/attached/
-String rootPath = pageContext.getServletContext().getRealPath("/") + "attached/";
+String rootPath = pageContext.getServletContext().getRealPath("/") + "attached";
 //根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
 String rootUrl  = request.getContextPath() + "/attached/";
 //图片扩展名
 String[] fileTypes = new String[]{"gif", "jpg", "jpeg", "png", "bmp"};
+
+File uploadDir = new File(rootPath);
+if(!uploadDir.isDirectory()){
+	Runtime run = Runtime.getRuntime();  
+	Process proc = null;
+	String os = System.getProperty("os.name");
+	if(os.toLowerCase().startsWith("win")){
+		proc = run.exec("cmd /c mklink /D "+rootPath+" d:\\attached");
+	}else{
+		proc = run.exec("");
+	}
+	proc.waitFor();
+}
 
 String dirName = request.getParameter("dir");
 if (dirName != null) {
@@ -25,7 +38,7 @@ if (dirName != null) {
 		out.println("Invalid Directory name.");
 		return;
 	}
-	rootPath += dirName + "/";
+	rootPath += "/" + dirName + "/";
 	rootUrl += dirName + "/";
 	File saveDirFile = new File(rootPath);
 	if (!saveDirFile.exists()) {
